@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 
@@ -36,7 +37,7 @@ function Index() {
             }}
           >
             <Link href={`product/${product.id}`}>
-            <img
+            <Image
               src={product.thumbnail}
               alt={product.title}
               style={{ width: '100%', borderRadius: '10px' }}
