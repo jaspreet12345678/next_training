@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-function ReviewDetails() { // Capitalize the component name
+function ReviewDetails() {
     const router = useRouter();
     const { productId, reviewId } = router.query;
 

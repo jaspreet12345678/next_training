@@ -2,18 +2,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 
-// Define the type for a product
 interface Product {
   id: number;
   title: string;
   description: string;
   price: number;
   thumbnail: string;
-  // Add any other fields you expect in the product object
 }
 
 function Index() {
-  // Define the state with the Product array type
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -40,7 +37,8 @@ function Index() {
             <Image
               src={product.thumbnail}
               alt={product.title}
-              style={{ width: '100%', borderRadius: '10px' }}
+              width = {250}
+              height={200}
               />
               </Link>
             <h3>{product.title}</h3>
