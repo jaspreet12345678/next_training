@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import styles from './index.module.css'; // Import the CSS module
+import Image from 'next/image';
 
 // Define the type for a product
 interface Product {
@@ -61,7 +62,7 @@ function ProductDetails() {
 
   return (
     <div className={styles.container}>
-      <img src={product.thumbnail} alt={product.title} className={styles.image} />
+        <Image src={product.thumbnail} alt={product.title} className={styles.image} />
       <h1 className={styles.title}>{product.title}</h1>
       <p className={styles.description}>{product.description}</p>
       <p className={styles.price}>Price: ${product.price}</p>

@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-function ReviewDetails() { // Changed the function name to start with an uppercase letter
+function ReviewDetails() { // Capitalize the component name
     const router = useRouter();
     const { productId, reviewId } = router.query;
 
