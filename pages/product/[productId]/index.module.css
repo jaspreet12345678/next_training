@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.image {
+  width: 200px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 2rem;
+  margin: 10px 0;
+}
+
+.description {
+  font-size: 1.1rem;
+  margin: 10px 0;
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.details {
+  max-width: 600px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.review {
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+.review p {
+  margin: 5px 0;
+}
+
+.review strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #555;
+}
