@@ -82,8 +82,23 @@ body {
   overflow-x: hidden;
 }
 
+/* styles/globals.css */
 body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
+.p-menubar {
+  background-color: #ffffff;
+  border: none;
+}
+.p-menubar .p-menubar-end {
+  display: flex;
+  align-items: center;
+}
+.p-menubar .pi-user {
+  cursor: pointer;
+}
+
 
 a {
   color: inherit;
