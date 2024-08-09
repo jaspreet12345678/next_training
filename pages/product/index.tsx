@@ -41,13 +41,13 @@ export default function ProductPage({ products, total, page, pageSize }: Product
     }
   };
 
-  const itemTemplate = (product: Product, layout: 'grid' | 'list') => (
+  const itemTemplate = (product: Product, layout: 'grid') => (
     <ProductCard key={product.id} product={product} layout={layout} index={products.indexOf(product)} getSeverity={getSeverity} />
   );
 
   const onPageChange = (event: any) => {
     const newPage = event.page + 1;
-    router.push(`?page=${newPage}`, undefined, { shallow: true });
+    router.push(`?page=${newPage}`, undefined, { scroll: false });
   };
 
   return (
@@ -58,11 +58,11 @@ export default function ProductPage({ products, total, page, pageSize }: Product
         layout={layout}
       />
       <Paginator
-        first={(page - 1) * pageSize}
-        rows={pageSize}
-        totalRecords={total}
-        onPageChange={onPageChange}
-        template="PrevPageLink PageLinks NextPageLink"
+         first={(page - 1) * pageSize}
+         rows={pageSize}
+         totalRecords={total}
+         onPageChange={onPageChange}
+         template="PrevPageLink PageLinks NextPageLink"
       />
     </div>
   );
@@ -77,11 +77,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const data = await res.json();
 
   return {
-      props: {
-          products: data.products,
-          total: data.total,
-          page,
-          pageSize
-      },
+    props: {
+      products: data.products,
+      total: data.total,
+      page,
+      pageSize
+    },
   };
 };

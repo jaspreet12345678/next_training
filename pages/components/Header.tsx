@@ -5,25 +5,19 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import Link from 'next/link';
-import { MenuItem } from 'primereact/menuitem';
+import { MenuItem, MenuItemOptions } from 'primereact/menuitem';
 
 interface CustomMenuItem extends MenuItem {
     label: string;
     icon?: string;
 }
 
-interface MenuOptions {
-    className: string;
-    onClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
-    [key: string]: any;  // For any other properties that might be passed in
-}
-
 const Header = () => {
-    const items = [
+    const items: MenuItem[] = [
         {
             label: 'Home',
             icon: 'pi pi-fw pi-home',
-            template: (item: CustomMenuItem, options: MenuOptions) => {
+            template: (item: MenuItem, options: MenuItemOptions) => {
                 return (
                     <Link href="/" className={options.className}>
                         <i className={item.icon}></i>
@@ -35,7 +29,7 @@ const Header = () => {
         {
             label: 'Products',
             icon: 'pi pi-fw pi-th-large',
-            template: (item: CustomMenuItem, options: MenuOptions) => {
+            template: (item: MenuItem, options: MenuItemOptions) => {
                 return (
                     <Link href="/product" className={options.className}>
                         <i className={item.icon}></i>
@@ -47,7 +41,12 @@ const Header = () => {
     ];
 
     const start = <img alt="logo" src="https://equalengineers.com/wp-content/uploads/2024/04/dummy-logo-5b.png" height="70" className="p-mr-2"></img>;
-    const end = <i className="pi pi-user" style={{ fontSize: '1.5rem' }}></i>;
+    const end = (
+        <div className="p-d-flex p-ai-center">
+            <i className="pi pi-shopping-cart" style={{ fontSize: '1.5rem', marginRight: '1rem' }}></i>
+            <i className="pi pi-user" style={{ fontSize: '1.5rem' }}></i>
+        </div>
+    );
 
     return (
         <div className="p-shadow-2">
