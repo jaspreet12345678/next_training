@@ -8,12 +8,12 @@ import { GetServerSideProps } from 'next';
 interface Product {
   id: string;
   category: string;
-  stockStatus: 'INSTOCK' | 'LOWSTOCK' | 'OUTOFSTOCK';
   thumbnail: string;
   title: string;
   rating: number;
   price: number;
 }
+
 
 type GetSeverity = (product: Product) => 'success' | 'info' | 'warning' | 'danger' | null;
 
@@ -24,25 +24,25 @@ interface ProductPageProps {
   pageSize: number;
 }
 
+interface ProductCardProps {
+  product: Product;
+  layout: 'grid' | 'list';
+  index: number;
+}
+
 export default function ProductPage({ products, total, page, pageSize }: ProductPageProps) {
   const [layout, setLayout] = useState('grid');
   const router = useRouter();
 
-  const getSeverity: GetSeverity = (product) => {
-    switch (product.stockStatus) {
-      case 'INSTOCK':
-        return 'success';
-      case 'LOWSTOCK':
-        return 'warning';
-      case 'OUTOFSTOCK':
-        return 'danger';
-      default:
-        return null;
-    }
-  };
+  
 
-  const itemTemplate = (product: Product, layout: 'grid') => (
-    <ProductCard key={product.id} product={product} layout={layout} index={products.indexOf(product)} getSeverity={getSeverity} />
+const itemTemplate = (product: Product) => (
+    <ProductCard 
+      key={product.id} 
+      product={product} 
+      layout={'grid'} 
+      index={products.indexOf(product)} 
+    />
   );
 
   const onPageChange = (event: any) => {
@@ -55,7 +55,7 @@ export default function ProductPage({ products, total, page, pageSize }: Product
       <DataView
         value={products}
         itemTemplate={itemTemplate}
-        layout={layout}
+        layout={'grid'}
       />
       <Paginator
          first={(page - 1) * pageSize}
