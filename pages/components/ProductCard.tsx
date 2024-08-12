@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
-import { Tag } from 'primereact/tag';
+import Link from 'next/link';
+import { useProductContext } from '../context/ProductContext';
 
 interface Product {
     id: string;
@@ -10,15 +11,22 @@ interface Product {
     title: string;
     rating: number;
     price: number;
+    description : string;
 }
 
 interface ProductCardProps {
     product: Product;
     layout: 'grid';
     index: number;
+    onClick: () => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, layout, index }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, layout }) => {
+    const { setSelectedProduct } = useProductContext();
+
+    const handleClick = () => {
+        setSelectedProduct(product);
+    };
 
     const gridItem = () => (
         <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" key={product.id}>
@@ -30,7 +38,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, layout, index }) => 
                     </div>
                 </div>
                 <div className="flex flex-column align-items-center gap-3 py-5">
-                    <img className="w-9 shadow-2 border-round" src={product.thumbnail} alt={product.title} />
+                    <Link href={`/product/${product.id}`} passHref>
+                        <img 
+                            className="w-9 shadow-2 border-round cursor-pointer" 
+                            src={product.thumbnail} 
+                            alt={product.title}
+                            onClick={handleClick}
+                        />
+                    </Link>
                     <div className="text-2xl font-bold">{product.title}</div>
                     <Rating value={product.rating} readOnly cancel={false} />
                 </div>
@@ -42,7 +57,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, layout, index }) => 
         </div>
     );
 
-    return layout === 'grid' ? gridItem() : '';
-}
+    return layout === 'grid' ? gridItem() : null;
+};
 
 export default ProductCard;

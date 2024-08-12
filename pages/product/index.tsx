@@ -4,6 +4,7 @@ import ProductCard from '../components/ProductCard';
 import { useRouter } from 'next/router';
 import { Paginator } from 'primereact/paginator';
 import { GetServerSideProps } from 'next';
+import { useProductContext } from '../context/ProductContext';
 
 interface Product {
   id: string;
@@ -12,10 +13,8 @@ interface Product {
   title: string;
   rating: number;
   price: number;
+  description: string;
 }
-
-
-type GetSeverity = (product: Product) => 'success' | 'info' | 'warning' | 'danger' | null;
 
 interface ProductPageProps {
   products: Product[];
@@ -24,24 +23,20 @@ interface ProductPageProps {
   pageSize: number;
 }
 
-interface ProductCardProps {
-  product: Product;
-  layout: 'grid' | 'list';
-  index: number;
-}
-
 export default function ProductPage({ products, total, page, pageSize }: ProductPageProps) {
-  const [layout, setLayout] = useState('grid');
   const router = useRouter();
+  const { setSelectedProduct } = useProductContext();
 
-  
-
-const itemTemplate = (product: Product) => (
-    <ProductCard 
-      key={product.id} 
-      product={product} 
-      layout={'grid'} 
-      index={products.indexOf(product)} 
+  const itemTemplate = (product: Product) => (
+    <ProductCard
+      key={product.id}
+      product={product}
+      layout={'grid'}
+      index={products.indexOf(product)}
+      onClick={() => {
+        setSelectedProduct(product);
+        router.push(`/product/${product.id}`);
+      }}
     />
   );
 
@@ -58,11 +53,11 @@ const itemTemplate = (product: Product) => (
         layout={'grid'}
       />
       <Paginator
-         first={(page - 1) * pageSize}
-         rows={pageSize}
-         totalRecords={total}
-         onPageChange={onPageChange}
-         template="PrevPageLink PageLinks NextPageLink"
+        first={(page - 1) * pageSize}
+        rows={pageSize}
+        totalRecords={total}
+        onPageChange={onPageChange}
+        template="PrevPageLink PageLinks NextPageLink"
       />
     </div>
   );

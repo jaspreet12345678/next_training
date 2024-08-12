@@ -1,0 +1,72 @@
+/* components/Footer.module.css */
+.footer {
+  background: #333;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.logo {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.nav {
+  margin: 10px 0;
+}
+
+.nav a {
+  color: #fff;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+.social {
+  margin: 10px 0;
+}
+
+.social a {
+  color: #fff;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.social a:hover {
+  text-decoration: underline;
+}
+
+.copy {
+  margin-top: 10px;
+  font-size: 0.875rem;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav a {
+    margin: 5px 0;
+  }
+
+  .social {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .social a {
+    margin: 5px 0;
+  }
+}
