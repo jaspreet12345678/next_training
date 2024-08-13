@@ -3,6 +3,7 @@ import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import Link from 'next/link';
 import { useProductContext } from '../context/ProductContext';
+import Image from 'next/image';
 
 interface Product {
     id: string;
@@ -39,10 +40,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, layout }) => {
                 </div>
                 <div className="flex flex-column align-items-center gap-3 py-5">
                     <Link href={`/product/${product.id}`} passHref>
-                        <img 
+                        <Image 
                             className="w-9 shadow-2 border-round cursor-pointer" 
                             src={product.thumbnail} 
                             alt={product.title}
+                            width={0} sizes="100vw"
+                    height={0} style={{ width: '100%', height: 'auto' }}
                             onClick={handleClick}
                         />
                     </Link>

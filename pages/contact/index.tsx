@@ -1,29 +1,50 @@
-// pages/contact.js
 import React from 'react';
+import { GetStaticProps } from 'next';
+import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
+import { InputTextarea } from 'primereact/inputtextarea';
+import Image from 'next/image';
 
-const Contact = ({ contactInfo } : any) => {
-  return (
-    <div>
-      <h1>Contact Us</h1>
-      <p>Address: {contactInfo.address}</p>
-      <p>Phone: {contactInfo.phone}</p>
-      <p>Email: {contactInfo.email}</p>
-    </div>
-  );
-};
+interface ContactUsProps {
+  imageUrl: string;
+}
 
-export async function getStaticProps() {
-  const contactInfo = {
-    address: '123 Main St, Anytown, USA',
-    phone: '(123) 456-7890',
-    email: 'contact@example.com'
-  };
+export const getStaticProps: GetStaticProps<ContactUsProps> = async () => {
+  const imageUrl = '/images/contact-image.png';
 
   return {
     props: {
-      contactInfo
-    }
+      imageUrl,
+    },
   };
-}
+};
 
-export default Contact;
+const ContactUs: React.FC<ContactUsProps> = ({ imageUrl }) => {
+  return (
+    <>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px', flexWrap: 'wrap' }}>
+        <div style={{ flex: '1 1 300px', paddingRight: '20px', textAlign: 'center' }}>
+          <Image src={imageUrl} alt="Contact Us" width={500} height={500} style={{ maxWidth: '100%', height: 'auto' }} />
+        </div>
+        <div style={{ flex: '1 1 300px', paddingLeft: '20px', width: '100%' }}>
+          <h2>Contact Us</h2>
+          <div className="p-field">
+            <label htmlFor="name">Name</label>
+            <InputText id="name" type="text" placeholder="Your Name" style={{ width: '100%', marginTop:'2px' }} />
+          </div>
+          <div className="p-field my-5">
+            <label htmlFor="email">Email</label>
+            <InputText id="email" type="email" placeholder="Your Email" style={{ width: '100%', marginTop:'2px' }} />
+          </div>
+          <div className="p-field">
+            <label htmlFor="message">Message</label>
+            <InputTextarea id="message" rows={5} placeholder="Your Message" style={{ width: '100%', marginTop:'2px' }} />
+          </div>
+          <Button label="Submit" icon="pi pi-send" style={{ width: '100%' }} />
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default ContactUs;
