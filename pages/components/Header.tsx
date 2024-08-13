@@ -52,7 +52,7 @@ const Header = () => {
     ];
 
     const start = <Image width={0} sizes="100vw"
-    height={0} alt="logo" src={"https://equalengineers.com/wp-content/uploads/2024/04/dummy-logo-5b.png"} className="p-mr-2" />;
+    height={0} style={{ width: '100%',height:'75px' }} alt="logo" src={"https://equalengineers.com/wp-content/uploads/2024/04/dummy-logo-5b.png"} className="p-mr-2" />;
     const end = (
         <div className="p-d-flex p-ai-center">
             <Link href="/checkout" passHref>
