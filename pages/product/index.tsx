@@ -4,7 +4,7 @@ import ProductCard from '../components/ProductCard';
 import { useRouter } from 'next/router';
 import { Paginator } from 'primereact/paginator';
 import { GetServerSideProps } from 'next';
-import { useProductContext } from '../context/ProductContext';
+import { useProductContext } from '../../context/ProductContext';
 
 interface Product {
   id: string;

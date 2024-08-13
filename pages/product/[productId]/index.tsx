@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
-import { useProductContext } from '@/pages/context/ProductContext';
-import { useCartContext } from '@/pages/context/CartContext';
+import { useProductContext } from '../../../context/ProductContext';
+import { useCartContext } from '../../../context/CartContext';
 import { useEffect } from 'react';
 import styles from '../../styles/product.module.css';
 import Image from 'next/image';

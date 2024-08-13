@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import Link from 'next/link';
-import { useProductContext } from '../context/ProductContext';
+import { useProductContext } from '../../context/ProductContext';
 import Image from 'next/image';
 
 interface Product {

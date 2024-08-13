@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
+import Image from 'next/image';
 
 interface ImageProps {
   images: { src: string, alt: string }[];
@@ -15,7 +16,8 @@ const Banner: React.FC<ImageProps> = ({ images }) => {
 
   const itemTemplate = (item: { src: string, alt: string }) => {
     return (
-      <img src={item.src} alt={item.alt} style={{ width: '100%', height }} />
+      <Image src={item.src} alt={item.alt} width={0} sizes="100vw"
+      height={0} style={{ width: '100%', height }} />
     );
   };
 

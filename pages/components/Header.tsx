@@ -6,7 +6,8 @@ import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import Link from 'next/link';
 import { MenuItem, MenuItemOptions } from 'primereact/menuitem';
-import { useCartContext } from '@/pages/context/CartContext'; // Import the cart context
+import { useCartContext } from '../../context/CartContext';
+import Image from 'next/image';
 
 const Header = () => {
     const { cartCount } = useCartContext(); // Use the cart context
@@ -50,7 +51,8 @@ const Header = () => {
         },
     ];
 
-    const start = <img alt="logo" src="https://equalengineers.com/wp-content/uploads/2024/04/dummy-logo-5b.png" height="70" className="p-mr-2"></img>;
+    const start = <Image width={0} sizes="100vw"
+    height={0} alt="logo" src={"https://equalengineers.com/wp-content/uploads/2024/04/dummy-logo-5b.png"} className="p-mr-2" />;
     const end = (
         <div className="p-d-flex p-ai-center">
             <Link href="/checkout" passHref>
