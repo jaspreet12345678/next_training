@@ -78,7 +78,7 @@ function ProductDetails({ selectedProduct }: { selectedProduct: any }) {
             <div style={{ width: '50%' }}>
                 <h1 className={styles.title}><strong>{t('title')} :</strong>{selectedProduct.title}</h1>
                 <p className={styles.description}><strong>{t('description')} :</strong>{selectedProduct.description}</p>
-                <p className={styles.price}>{t('title')}: ${selectedProduct.price}</p>
+                <p className={styles.price}>{t('price')}: ${selectedProduct.price}</p>
                 <Button onClick={addToCart}>Add to Cart</Button>
             </div>
         </div>

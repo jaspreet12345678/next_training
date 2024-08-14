@@ -23,14 +23,14 @@
     "cart": "Cart"
   },
   "Product" :{
-    "title": "Product Title",
+    "title": "Title",
     "description": "Description",
     "price": "Price",
     "rating": "Rating",
     "pagination_prev": "Previous",
     "pagination_next": "Next"
   },
-  "checkout":{
+  "Checkout":{
     "title": "Checkout",
     "product": "Product",
     "quantity": "Quantity",
