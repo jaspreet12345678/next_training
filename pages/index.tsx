@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Banner from "./components/Banner";
 import { GetStaticProps } from "next";
-import { useTranslation } from 'react-i18next';
+import { useTranslations } from "next-intl";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,7 +11,7 @@ interface HomeProps {
   images: { src: string; alt: string }[];
 }
 
-export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+export const getStaticProps: GetStaticProps<HomeProps> = async ({ locale }) => {
   const images = [
     { src: '/images/perfume1.jpg', alt: 'Banner 1' },
     { src: '/images/1657.jpg', alt: 'Banner 3' },
@@ -22,11 +22,13 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   return {
     props: {
       images,
+      messages: (await import(`/./messages/${locale}.json`)).default
     },
   };
 };
 
 export default function Home({ images }: HomeProps) {
+  const t = useTranslations('Index');
   return (
     <>
       <Head>

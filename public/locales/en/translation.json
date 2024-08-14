@@ -1,0 +1,9 @@
+{
+    "contactUs": {
+      "title": "Contact Us",
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Submit"
+    }
+  }

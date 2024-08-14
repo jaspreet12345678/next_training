@@ -5,23 +5,47 @@ import { useEffect } from 'react';
 import styles from '../../styles/product.module.css';
 import Image from 'next/image';
 import { Button } from 'primereact/button';
+import { useTranslations } from 'next-intl';
 
-function ProductDetails() {
-    const { selectedProduct, setSelectedProduct } = useProductContext();
+export const getStaticPaths = async () => {
+    // Fetch a list of product IDs that should be statically generated
+    const response = await fetch('https://dummyjson.com/products');
+    const data = await response.json();
+
+    // Generate paths from the product IDs
+    const paths = data.products.map((product: any) => ({
+        params: { productId: product.id.toString() },
+    }));
+
+    return {
+        paths,
+        fallback: 'blocking', // or 'false' if you want to generate only the paths returned by `getStaticPaths`
+    };
+};
+
+export const getStaticProps = async ({ params, locale }: any) => {
+    const productId = params.productId;
+
+    // Fetch the product data
+    const response = await fetch(`https://dummyjson.com/products/${productId}`);
+    const productData = await response.json();
+
+    return {
+        props: {
+            selectedProduct: productData,
+            messages: (await import(`../../../messages/${locale}.json`)).default,
+        },
+    };
+};
+
+function ProductDetails({ selectedProduct }: { selectedProduct: any }) {
+    const { setSelectedProduct } = useProductContext();
     const { cartCount, setCartCount } = useCartContext();
-    const router = useRouter();
-    const { productId } = router.query;
+    const t = useTranslations('Product');
 
     useEffect(() => {
-        if (!selectedProduct && productId) {
-            fetch(`https://dummyjson.com/products/${productId}`)
-                .then((res) => res.json())
-                .then((data) => {
-                    setSelectedProduct(data);
-                })
-                .catch((error) => console.error('Error fetching product:', error));
-        }
-    }, [productId, selectedProduct, setSelectedProduct]);
+        setSelectedProduct(selectedProduct);
+    }, [selectedProduct, setSelectedProduct]);
 
     const addToCart = () => {
         if (selectedProduct) {
@@ -52,9 +76,9 @@ function ProductDetails() {
                     height={0} className={styles.image} style={{ width: '100%', height: 'auto' }} />
             </div>
             <div style={{ width: '50%' }}>
-                <h1 className={styles.title}>{selectedProduct.title}</h1>
-                <p className={styles.description}><strong>Description :</strong>{selectedProduct.description}</p>
-                <p className={styles.price}>Price: ${selectedProduct.price}</p>
+                <h1 className={styles.title}><strong>{t('title')} :</strong>{selectedProduct.title}</h1>
+                <p className={styles.description}><strong>{t('description')} :</strong>{selectedProduct.description}</p>
+                <p className={styles.price}>{t('title')}: ${selectedProduct.price}</p>
                 <Button onClick={addToCart}>Add to Cart</Button>
             </div>
         </div>

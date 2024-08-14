@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DataView } from 'primereact/dataview';
-import ProductCard from '../components/ProductCard';
 import { useRouter } from 'next/router';
 import { Paginator } from 'primereact/paginator';
 import { GetServerSideProps } from 'next';
-import { useProductContext } from '../../context/ProductContext';
+
+import { useTranslations } from 'next-intl';
+import { useProductContext } from '@/context/ProductContext';
+import ProductCard from '../components/ProductCard';
+import { useCartContext } from '@/context/CartContext';
 
 interface Product {
   id: string;
@@ -24,8 +27,17 @@ interface ProductPageProps {
 }
 
 export default function ProductPage({ products, total, page, pageSize }: ProductPageProps) {
+  const { cartCount, setCartCount } = useCartContext();
+  const t = useTranslations('Product');
   const router = useRouter();
   const { setSelectedProduct } = useProductContext();
+
+  const updateCartCount = () => {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const cartCount = cart.length;
+    localStorage.setItem('cartCount', cartCount.toString());
+    setCartCount(cartCount);
+  };
 
   const itemTemplate = (product: Product) => (
     <ProductCard
@@ -36,6 +48,12 @@ export default function ProductPage({ products, total, page, pageSize }: Product
       onClick={() => {
         setSelectedProduct(product);
         router.push(`/product/${product.id}`);
+      }}
+      onAddToCart={() => {
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        cart.push(product);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
       }}
     />
   );
@@ -63,8 +81,8 @@ export default function ProductPage({ products, total, page, pageSize }: Product
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const page = parseInt(context.query.page as string) || 1;
+export const getServerSideProps: GetServerSideProps = async ({ locale, query }) => {
+  const page = parseInt(query.page as string) || 1;
   const pageSize = 12;
   const skip = (page - 1) * pageSize;
 
@@ -76,7 +94,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       products: data.products,
       total: data.total,
       page,
-      pageSize
+      pageSize,
+      messages: (await import(`../../messages/${locale}.json`)).default,
+      locale,
     },
   };
 };

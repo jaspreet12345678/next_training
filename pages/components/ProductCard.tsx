@@ -4,6 +4,7 @@ import { Rating } from 'primereact/rating';
 import Link from 'next/link';
 import { useProductContext } from '../../context/ProductContext';
 import Image from 'next/image';
+import { useCartContext } from '@/context/CartContext';
 
 interface Product {
     id: string;
@@ -12,7 +13,7 @@ interface Product {
     title: string;
     rating: number;
     price: number;
-    description : string;
+    description: string;
 }
 
 interface ProductCardProps {
@@ -20,13 +21,18 @@ interface ProductCardProps {
     layout: 'grid';
     index: number;
     onClick: () => void;
+    onAddToCart: () => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, layout }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, layout, onClick, onAddToCart }) => {
     const { setSelectedProduct } = useProductContext();
 
     const handleClick = () => {
         setSelectedProduct(product);
+    };
+
+    const handleAddToCart = () => {
+        onAddToCart();
     };
 
     const gridItem = () => (
@@ -39,13 +45,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, layout }) => {
                     </div>
                 </div>
                 <div className="flex flex-column align-items-center gap-3 py-5">
-                    <Link href={`/product/${product.id}`} passHref>
+                    <Link style={{display:'flex',justifyContent:'center'}} href={`/product/${product.id}`} passHref>
                         <Image 
                             className="w-9 shadow-2 border-round cursor-pointer" 
                             src={product.thumbnail} 
                             alt={product.title}
                             width={0} sizes="100vw"
-                    height={0} style={{ width: '100%', height: 'auto' }}
+                            height={0} style={{ width: '100%', height: 'auto' }}
                             onClick={handleClick}
                         />
                     </Link>
@@ -54,7 +60,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, layout }) => {
                 </div>
                 <div className="flex align-items-center justify-content-between">
                     <span className="text-2xl font-semibold">${product.price}</span>
-                    <Button icon="pi pi-shopping-cart" className="p-button-rounded" />
+                    <Button 
+                        icon="pi pi-shopping-cart" 
+                        className="p-button-rounded" 
+                        onClick={handleAddToCart} // Attach handler
+                    />
                 </div>
             </div>
         </div>

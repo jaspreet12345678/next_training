@@ -1,0 +1,41 @@
+{
+  "Index": {
+    "title": "मुखपृष्ठ",
+    "description": "यह मुखपृष्ठ है।"
+  },
+  "LocaleSwitcher": {
+    "switchLocale": "{locale, select, de {जर्मन} en {अंग्रेज़ी} other {अज्ञात}} में स्विच करें"
+  },
+  "PageLayout": {
+    "pageTitle": "next-intl"
+  },
+  "ContactUs": {
+    "title": "हमसे संपर्क करें",
+    "name": "नाम",
+    "email": "ईमेल",
+    "message": "संदेश",
+    "submit": "सबमिट करें"
+  },
+  "Header": {
+    "home": "होम",
+    "products": "उत्पाद",
+    "contact": "संपर्क",
+    "cart": "कार्ट"
+  },
+  "Product": {
+    "title": "उत्पाद विवरण",
+    "description": "विवरण",
+    "price": "कीमत",
+    "addToCart": "कार्ट में डालें",
+    "loading": "लोड हो रहा है..."
+  },
+  "Checkout" : {
+    "title": "चेकआउट",
+    "product": "उत्पाद",
+    "quantity": "मात्रा",
+    "price": "कीमत",
+    "total": "कुल",
+    "empty_cart": "आपकी गाड़ी खाली है",
+    "checkout_button": "चेकआउट"
+  }
+}

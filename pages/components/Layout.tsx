@@ -1,15 +1,13 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import { useTranslations } from 'next-intl';
 
-type LayoutProps = {
-    children: ReactNode;
-};
-
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const t = useTranslations('PageLayout');
     return (
         <>
-            <Header />
+            <Header/>
             <main>{children}</main>
             <Footer />
         </>
